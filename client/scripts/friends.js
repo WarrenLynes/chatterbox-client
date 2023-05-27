@@ -7,9 +7,9 @@ var Friends = {
 
   _data: [],
 
-  add: function (friendName) {
+  add: function (username) {
     this._data.push({
-      username: friendName,
+      username,
       currentlyFriends: true
     });
   },

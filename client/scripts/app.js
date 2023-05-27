@@ -11,16 +11,18 @@ var App = {
   initialize: function () {
     App.username = window.location.search.substr(10);
 
-
-
     // Fetch initial batch of messages
     App.startSpinner();
     App.fetch(() => {
       App.stopSpinner();
       FormView.initialize();
-      RoomsView.initialize();
       MessagesView.initialize();
+      RoomsView.initialize();
     });
+    var interval = setInterval(() => {
+      App.startSpinner();
+      App.fetch(App.stopSpinner);
+    }, 10000);
 
     // TODO: Make sure the app loads data from the API
     // continually, instead of just once at the start.
@@ -31,9 +33,6 @@ var App = {
       // examine the response from the server request:
       Messages.setData(data);
       callback();
-
-      // TODO: Use the data to update Messages and Rooms
-      // and re-render the corresponding views.
     });
   },
 
